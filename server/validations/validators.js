@@ -19,3 +19,15 @@ exports.hasFoodType = body('foodType')
 exports.hasFoodQuantity = body('foodQuantity')
 	.isLength({ min: 0 })
 	.withMessage('foodQuantity is required.');
+
+exports.hasName = body('name')
+	.isLength({ min: 5 })
+	.withMessage('Name is required. Min lenght is 5 characters');
+
+exports.isEmail = body('name')
+	.isEmail()
+	.withMessage('Email field must contain a correct email');
+
+exports.hasPassword = body('name')
+	.exists()
+	.withMessage('Password canot be empty');

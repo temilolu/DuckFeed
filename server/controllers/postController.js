@@ -34,6 +34,17 @@ exports.upadate = async (req, res, next) => {
 	}
 };
 
+exports.delete = async (req, res, next) => {
+	try {
+		let post = await Post.findById(req.params.id);
+		await post.delete();
+
+		res.send({ message: 'Delete sucessful' });
+	} catch (err) {
+		next(err);
+	}
+};
+
 exports.store = async (req, res, next) => {
 	try {
 		validationHandler(req);

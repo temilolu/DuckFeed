@@ -13,5 +13,6 @@ router.get('/', postController.index);
 router.post('/', [hasFoodName, hasLocation, hasNumberOfDucks, hasFoodType, hasFoodQuantity], postController.store);
 router.get('/:id', postController.show);
 router.patch('/:id', [hasFoodName, hasNumberOfDucks], postController.upadate);
+router.delete('/:id', postController.delete);
 
 module.exports = router;

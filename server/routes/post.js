@@ -12,5 +12,6 @@ const {
 router.get('/', postController.index);
 router.post('/', [hasFoodName, hasLocation, hasNumberOfDucks, hasFoodType, hasFoodQuantity], postController.store);
 router.get('/:id', postController.show);
+router.patch('/:id', [hasFoodName, hasNumberOfDucks], postController.upadate);
 
 module.exports = router;

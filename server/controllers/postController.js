@@ -19,6 +19,21 @@ exports.show = async (req, res, next) => {
 	}
 };
 
+exports.upadate = async (req, res, next) => {
+	try {
+		validationHandler(req);
+
+		let post = await Post.findById(req.params.id);
+		post.foodName = req.body.foodName;
+		post.numberOfDucks = req.body.numberOfDucks;
+		post = await post.save();
+
+		res.send(post);
+	} catch (err) {
+		next(err);
+	}
+};
+
 exports.store = async (req, res, next) => {
 	try {
 		validationHandler(req);

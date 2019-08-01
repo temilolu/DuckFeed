@@ -1,5 +1,5 @@
 const validationHandler = require('../validations/validationHandler');
-const Post = require('../models/postModel');
+const Post = require('../models/post');
 
 exports.index = async (req, res) => {
 	try {
@@ -28,7 +28,7 @@ exports.store = async (req, res, next) => {
 		post.location = req.body.location;
 		post.numberOfDucks = req.body.numberOfDucks;
 		post.foodType = req.body.foodType;
-		post.quantity = req.body.quantity;
+		post.foodQuantity = req.body.foodQuantity;
 		post = await post.save();
 
 		res.send(post);

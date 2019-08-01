@@ -9,6 +9,7 @@ const PostSchema = new Schema({
 	numberOfDucks: { type: String, required: true },
 	foodType: { type: String, required: true },
 	foodQuantity: { type: String, required: true }
+	// user:
 });
 
 module.exports = mongoose.model('post', PostSchema);

@@ -10,9 +10,12 @@ const app = express();
 app.use(cors());
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb+srv://temitayo094:JJbgvWPGqs8cara7@cluster0-hwbmq.mongodb.net/duckfeed', {
-	useNewUrlParser: true
-});
+mongoose.connect(
+	'mongodb+srv://temitayo094:CatmyBeF4wRuHqtZ@duckfeed-elegv.mongodb.net/duckfeed?retryWrites=true&w=majority',
+	{
+		useNewUrlParser: true
+	}
+);
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 

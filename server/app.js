@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const errorHandler = require('./middlewares/errorHandler');
 const postRoutes = require('./routes/post');
+const passportJWT = require('./middlewares/passportJWT')();
 const app = express();
 
 app.use(cors());
@@ -18,6 +19,8 @@ mongoose.connect(
 );
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(passportJWT.initialize());
 
 app.use('/api/post', postRoutes);
 app.use(errorHandler);

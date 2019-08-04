@@ -7,18 +7,17 @@ const postRoutes = require('./routes/post');
 const authRoutes = require('./routes/auth');
 const errorHandler = require('./middlewares/errorHandler');
 const passportJWT = require('./middlewares/passportJWT')();
+const config = require('./config');
 
 const app = express();
+const port = process.env.PORT;
 
 app.use(cors());
 
 mongoose.Promise = global.Promise;
-mongoose.connect(
-	'mongodb+srv://temitayo094:CatmyBeF4wRuHqtZ@duckfeed-elegv.mongodb.net/duckfeed?retryWrites=true&w=majority',
-	{
-		useNewUrlParser: true
-	}
-);
+mongoose.connect(config.mongoURI, {
+	useNewUrlParser: true
+});
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -28,5 +27,5 @@ app.use('/api/post', passportJWT.authenticate(), postRoutes);
 app.use('/api/auth', authRoutes);
 app.use(errorHandler);
 
-app.get('/', (req, res) => res.send('Hello world'));
-app.listen(3000, () => console.log('Server ready'));
+app.get('/api', (req, res) => res.send('Hello world'));
+app.listen(port, () => console.log('Server ready'));

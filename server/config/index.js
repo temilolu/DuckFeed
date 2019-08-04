@@ -1,3 +1,5 @@
 module.exports = {
-	jwtSecret: 'dsadsa48415qweqa' //this is a random string
+	jwtSecret: 'dsadsa48415qweqa',
+	mongoURI:
+		'mongodb+srv://temitayo094:CatmyBeF4wRuHqtZ@duckfeed-elegv.mongodb.net/duckfeed?retryWrites=true&w=majority'
 };

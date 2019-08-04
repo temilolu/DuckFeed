@@ -55,6 +55,7 @@ exports.store = async (req, res, next) => {
 		post.numberOfDucks = req.body.numberOfDucks;
 		post.foodType = req.body.foodType;
 		post.foodQuantity = req.body.foodQuantity;
+		post.user = req.user;
 		post = await post.save();
 
 		res.send(post);

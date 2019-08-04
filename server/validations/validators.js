@@ -24,10 +24,10 @@ exports.hasName = body('name')
 	.isLength({ min: 5 })
 	.withMessage('Name is required. Min lenght is 5 characters');
 
-exports.isEmail = body('name')
+exports.isEmail = body('email')
 	.isEmail()
 	.withMessage('Email field must contain a correct email');
 
-exports.hasPassword = body('name')
+exports.hasPassword = body('password')
 	.exists()
 	.withMessage('Password canot be empty');

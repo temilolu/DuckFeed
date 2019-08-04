@@ -1,3 +1,4 @@
+const validationHandler = require('../validations/validationHandler');
 const jwt = require('jwt-simple');
 const config = require('../config');
 
@@ -44,7 +45,7 @@ exports.signup = async (req, res, next) => {
 		user.email = req.body.email;
 		user.password = await user.encryptPassword(req.body.password);
 		user.name = req.body.name;
-		user - (await user.save());
+		user = await user.save();
 
 		const token = jwt.encode({ id: user.id }, config.jwtSecret);
 		return res.send({ user, token });

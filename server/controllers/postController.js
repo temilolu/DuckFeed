@@ -3,7 +3,13 @@ const Post = require('../models/post');
 
 exports.index = async (req, res) => {
 	try {
-		const posts = await Post.find().sort({ feedTime: -1 });
+		const pagination = req.query.pagination ? parseInt(req.query.pagination) : 10;
+		const page = req.query.page ? parseInt(req.query.page) : 1;
+		const posts = await Post.find()
+			.skip((page - 1) * pagination)
+			.limit(pagination)
+			.populate('user')
+			.sort({ feedTime: -1 });
 		res.send(posts);
 	} catch (err) {
 		next(err);
@@ -12,7 +18,7 @@ exports.index = async (req, res) => {
 
 exports.show = async (req, res, next) => {
 	try {
-		const post = await Post.findOne({ _id: req.params.id });
+		const post = await Post.findOne({ _id: req.params.id }).populate('user');
 		res.send(post);
 	} catch (err) {
 		next(err);

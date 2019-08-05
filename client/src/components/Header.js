@@ -21,7 +21,7 @@ const Header = () => (
 				<span className="font-semibold text-xl tracking-tight">DuckFeed</span>
 			</div>
 
-			<div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto ">
+			{/* <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto ">
 				<div className="text-right">
 					<a
 						href="/"
@@ -30,7 +30,7 @@ const Header = () => (
 						My Account
 					</a>
 				</div>
-			</div>
+			</div> */}
 		</nav>
 	</React.Fragment>
 );

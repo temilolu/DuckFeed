@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './index.css';
 import Header from './components/Header';
 import ItemList from './components/ItemList';
-import Login from './components/Login';
+// import Login from './components/Login';
 import PostForm from './components/PostForm';
 import axios from 'axios';
 
@@ -34,18 +34,16 @@ class App extends Component {
 					<Header />
 					<main className="px-10  bg-gray-200">
 						<div className="flex flex-wrap bg-gray-200">
-							<div className="w-3/5 p-2">
-								<div className="p-2">
-									<ItemList item={this.state.feeds} />
-								</div>
-							</div>
 							<div className="w-2/5 p-2">
 								<div className="p-2">
 									<PostForm />
 								</div>
 
+								<div className="p-2">{/* <Login /> */}</div>
+							</div>
+							<div className="w-3/5 p-2">
 								<div className="p-2">
-									<Login />
+									<ItemList item={this.state.feeds} />
 								</div>
 							</div>
 						</div>

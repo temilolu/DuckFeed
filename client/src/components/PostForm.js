@@ -1,21 +1,56 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class PostForm extends Component {
-	constructor(props) {
-		super(props);
+const initialState = {
+	foodName: '',
+	location: '',
+	numberOfDucks: '',
+	foodType: '',
+	foodQuantity: '',
+	foodNameError: '',
+	locationError: '',
+	numberOfDucksError: '',
+	foodTypeError: '',
+	foodQuantityError: ''
+};
 
-		this.state = {
-			foodName: '',
-			location: '',
-			numberOfDucks: '',
-			foodType: '',
-			foodQuantity: ''
-		};
-	}
+class PostForm extends Component {
+	state = initialState;
 
 	changeHandler = e => {
 		this.setState({ [e.target.name]: e.target.value });
+	};
+
+	validate = () => {
+		let foodNameError = '';
+		let locationError = '';
+		let numberOfDucksError = '';
+		let foodTypeError = '';
+		let foodQuantityError = '';
+
+		if (!this.state.foodName) {
+			foodNameError = 'Food name cannot be blank';
+		}
+		if (!this.state.location) {
+			locationError = 'Location cannot be blank';
+		}
+		if (!this.state.numberOfDucks) {
+			numberOfDucksError = 'Number of Ducks cannot be blank';
+		}
+
+		if (!this.state.foodType) {
+			foodTypeError = 'Food type cannot be blank';
+		}
+
+		if (!this.state.foodQuantity) {
+			foodQuantityError = 'Food Quantity cannot be blank';
+		}
+
+		if (foodNameError || locationError || numberOfDucksError || foodTypeError || foodQuantityError) {
+			this.setState({ foodNameError, locationError, numberOfDucksError, foodTypeError, foodQuantityError });
+			return false;
+		}
+		return true;
 	};
 
 	submitHandler = e => {
@@ -30,6 +65,14 @@ class PostForm extends Component {
 				console.log(error);
 			});
 		console.log(this.state);
+
+		const isValid = this.validate();
+		if (isValid) {
+			console.log(this.state);
+
+			// Clear form
+			this.setState(initialState);
+		}
 	};
 
 	render() {
@@ -57,6 +100,7 @@ class PostForm extends Component {
 											placeholder="Food Name"
 											onChange={this.changeHandler}
 										/>
+										<div className="text-xs text-red-600">{this.state.foodNameError}</div>
 									</div>
 
 									<div className="mb-4">
@@ -74,6 +118,7 @@ class PostForm extends Component {
 											placeholder="Location"
 											onChange={this.changeHandler}
 										/>
+										<div className="text-xs text-red-600">{this.state.locationError}</div>
 									</div>
 
 									<div className="mb-4">
@@ -91,6 +136,7 @@ class PostForm extends Component {
 											placeholder="Number of Ducks"
 											onChange={this.changeHandler}
 										/>
+										<div className="text-xs text-red-600">{this.state.numberOfDucksError}</div>
 									</div>
 
 									<div className="mb-4">
@@ -108,6 +154,7 @@ class PostForm extends Component {
 											placeholder="Food Type"
 											onChange={this.changeHandler}
 										/>
+										<div className="text-xs text-red-600">{this.state.foodTypeError}</div>
 									</div>
 
 									<div className="mb-4">
@@ -125,6 +172,8 @@ class PostForm extends Component {
 											placeholder="Food Quantity"
 											onChange={this.changeHandler}
 										/>
+
+										<div className="text-xs text-red-600">{this.state.foodQuantityError}</div>
 									</div>
 
 									<div className="flex items-center justify-between">

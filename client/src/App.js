@@ -4,6 +4,7 @@ import Header from './components/Header';
 import ItemList from './components/ItemList';
 import Login from './components/Login';
 import PostForm from './components/PostForm';
+import axios from 'axios';
 
 class App extends Component {
 	constructor(props) {
@@ -16,13 +17,12 @@ class App extends Component {
 	componentDidMount() {
 		const url = 'http://localhost:3001/api/post';
 
-		fetch(url)
+		axios
+			.get(url)
 			.then(response => {
-				return response.json();
-			})
-			.then(data => {
+				console.log(response);
 				this.setState({
-					feeds: data
+					feeds: response.data
 				});
 			})
 			.catch(error => console.log(error));
@@ -37,7 +37,6 @@ class App extends Component {
 							<div className="w-3/5 p-2">
 								<div className="p-2">
 									<ItemList item={this.state.feeds} />
-									{console.log(this.state)}
 								</div>
 							</div>
 							<div className="w-2/5 p-2">

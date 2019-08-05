@@ -8,11 +8,20 @@ const authRoutes = require('./routes/auth');
 const errorHandler = require('./middlewares/errorHandler');
 const passportJWT = require('./middlewares/passportJWT')();
 const config = require('./config');
+const rateLimit = require('express-rate-limit');
 
 const app = express();
 const port = process.env.PORT;
 
 app.use(cors());
+
+const limiter = rateLimit({
+	windowMs: 10 * 1000, // 10 seconds
+	max: 10 // limit each IP to 100 requests per windowMs
+});
+
+//  apply to all requests
+app.use(limiter);
 
 mongoose.Promise = global.Promise;
 mongoose.connect(config.mongoURI, {

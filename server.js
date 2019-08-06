@@ -41,8 +41,12 @@ app.use(errorHandler);
 
 app.get('/api', (req, res) => res.send('Welcome to duckfeed api'));
 
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, './client/build/index.html'));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './client/build/index.html'), () => {
+        if(err){
+            res.status(500).send(err)
+        }
+    });
 });
 
 

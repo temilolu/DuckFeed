@@ -3,7 +3,7 @@ import Item from '../components/Item';
 
 export default class ItemList extends Component {
 	renderItems() {
-		return this.props.item.map(item => <Item key={item._id} item={item} />);
+		return this.props.items.map(item => <Item key={item._id} items={item} />);
 	}
 
 	render() {

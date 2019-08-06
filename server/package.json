@@ -4,8 +4,8 @@
 	"description": "",
 	"main": "app.js",
 	"scripts": {
-		"test": "jest",
-		"start-dev": "PORT=3001 nodemon --inspect ./app.js"
+		"test": "jest --detectOpenHandles",
+		"start": "PORT=3001 nodemon --inspect ./server.js"
 	},
 	"keywords": [],
 	"author": "",
@@ -17,10 +17,16 @@
 		"express": "^4.17.1",
 		"express-rate-limit": "^5.0.0",
 		"express-validator": "^6.1.1",
-		"jest": "^24.8.0",
 		"jwt-simple": "^0.5.6",
 		"mongoose": "^5.6.7",
 		"passport": "^0.4.0",
 		"passport-jwt": "^4.0.0"
+	},
+	"devDependencies": {
+		"babel-cli": "^6.26.0",
+		"babel-preset-env": "^1.7.0",
+		"jest": "^24.8.0",
+		"superagent": "^5.1.0",
+		"supertest": "^4.0.2"
 	}
 }

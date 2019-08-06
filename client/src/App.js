@@ -30,7 +30,7 @@ class App extends Component {
 	render() {
 		return (
 			<React.Fragment>
-				<div className="container px-20 ">
+				<div className="container mx-auto ">
 					<Header />
 					<main className="px-10  bg-gray-200">
 						<div className="flex flex-wrap bg-gray-200">
@@ -43,7 +43,7 @@ class App extends Component {
 							</div>
 							<div className="w-3/5 p-2">
 								<div className="p-2">
-									<ItemList item={this.state.feeds} />
+									<ItemList items={this.state.feeds} />
 								</div>
 							</div>
 						</div>

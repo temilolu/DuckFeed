@@ -30,7 +30,7 @@ mongoose.connect(config.mongoURI, {
 	useNewUrlParser: true
 });
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, "client", "build", "index.html")));
+app.use(express.static(path.join(__dirname, "client/build")));
 
 app.use(passportJWT.initialize());
 
@@ -41,7 +41,7 @@ app.use(errorHandler);
 app.get('/api', (req, res) => res.send('Welcome to duckfeed api'));
 
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+    res.sendFile(path.join(__dirname, "client/build/index.html"));
 });
 
 module.exports = app;

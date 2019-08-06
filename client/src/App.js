@@ -1,34 +1,37 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import './index.css';
 import Header from './components/Header';
 import ItemList from './components/ItemList';
-// import Login from './components/Login';
 import PostForm from './components/PostForm';
 import axios from 'axios';
+import Pagination from './components/Pagination';
 
-class App extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			feeds: []
+const App = () => {
+	const [posts, setPosts] = useState([]);
+	const [loading, setLoading] = useState(false);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [postsPerPage] = useState(5);
+
+	useEffect(() => {
+		const fetchPosts = async () => {
+			setLoading(true);
+			const res = await axios.get('https://duckfeedapps.herokuapp.com/api/post');
+			setPosts(res.data);
+			setLoading(false);
 		};
-	}
 
-	componentDidMount() {
-		const url = 'http://localhost:3001/api/post';
+		fetchPosts();
+	}, []);
 
-		axios
-			.get(url)
-			.then(response => {
-				console.log(response);
-				this.setState({
-					feeds: response.data
-				});
-			})
-			.catch(error => console.log(error));
-	}
-	render() {
-		return (
+	 // Get current posts
+	const indexOfLastPost = currentPage * postsPerPage;
+	const indexOfFirstPost = indexOfLastPost - postsPerPage;
+	const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+	// Change page
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
+  return (
 			<React.Fragment>
 				<div className="container mx-auto ">
 					<Header />
@@ -38,12 +41,16 @@ class App extends Component {
 								<div className="p-2">
 									<PostForm />
 								</div>
-
-								<div className="p-2">{/* <Login /> */}</div>
 							</div>
 							<div className="w-3/5 p-2">
 								<div className="p-2">
-									<ItemList items={this.state.feeds} />
+									<ItemList items={currentPosts} loading={loading}/>
+
+									<Pagination
+        postsPerPage={postsPerPage}
+        totalPosts={posts.length}
+        paginate={paginate}
+      />
 								</div>
 							</div>
 						</div>
@@ -51,7 +58,6 @@ class App extends Component {
 				</div>
 			</React.Fragment>
 		);
-	}
 }
 
 export default App;

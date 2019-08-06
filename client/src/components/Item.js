@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Item = ({items}) => {
+
 	return (
 		<React.Fragment>
 			<div className="py-4">

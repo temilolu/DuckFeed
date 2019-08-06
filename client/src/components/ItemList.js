@@ -1,16 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Item from '../components/Item';
 
-export default class ItemList extends Component {
-	renderItems() {
-		return this.props.items.map(item => <Item key={item._id} items={item} />);
-	}
+const ItemList = ({items, loading}) => {
+	if (loading) {
+    return <h2>Loading...</h2>;
+  }
 
-	render() {
-		return (
+  return (
 			<React.Fragment>
-				<ul className="list-inside">{this.renderItems()}</ul>
+				<ul className="list-inside">{items.map(item => <Item key={item._id} items={item} />)}</ul>
 			</React.Fragment>
 		);
-	}
 }
+
+export default ItemList;
+
+

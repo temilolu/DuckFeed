@@ -55,7 +55,7 @@ class PostForm extends Component {
 
 	submitHandler = e => {
 		e.preventDefault();
-		const url = 'http://localhost:3001/api/post';
+		const url = 'https://duckfeedapps.herokuapp.com/api/post';
 		axios
 			.post(url, this.state)
 			.then(response => {

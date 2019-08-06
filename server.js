@@ -1,6 +1,6 @@
 //server.js
 const app = require( './app' );
-const config = require('./config');
 
+app.set('port', (process.env.PORT || 5000));
 
-app.listen( config.port, () => console.log( 'Server ready' ) );
+app.listen( app.get('port'), () => console.log( 'Server ready' + app.get('port') ) );

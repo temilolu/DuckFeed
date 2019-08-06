@@ -47,10 +47,10 @@ const App = () => {
 									<ItemList items={currentPosts} loading={loading}/>
 
 									<Pagination
-        postsPerPage={postsPerPage}
-        totalPosts={posts.length}
-        paginate={paginate}
-      />
+										postsPerPage={postsPerPage}
+										totalPosts={posts.length}
+										paginate={paginate}
+									/>
 								</div>
 							</div>
 						</div>

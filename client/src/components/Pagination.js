@@ -12,9 +12,9 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
       <ul className='inline-flex py-4'>
         {pageNumbers.map(number => (
           <li key={number} className='page-item'>
-            <a onClick={() => paginate(number)} href='!#' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mx-1">
+            <button onClick={() => paginate(number)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mx-1">
               {number}
-            </a>
+            </button>
           </li>
         ))}
       </ul>

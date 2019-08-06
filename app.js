@@ -23,9 +23,7 @@ const limiter = rateLimit({
 app.use(limiter);
 
 // Serve up static assets
-if(process.env.NODE_ENV === "production"){
-    app.use(express.static("client/build"));
-}
+app.use(express.static("client/build"));
 
 mongoose.Promise = global.Promise;
 mongoose.connect(config.mongoURI, {
@@ -40,6 +38,6 @@ app.use('/api/post', postRoutes);
 app.use('/api/auth', authRoutes);
 app.use(errorHandler);
 
-app.get('/api', (req, res) => res.send('Hello world'));
+app.get('/api', (req, res) => res.send('Welcome to duckfeed api'));
 
 module.exports = app;

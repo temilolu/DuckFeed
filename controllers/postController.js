@@ -3,7 +3,7 @@ const Post = require('../models/post');
 
 exports.index = async (req, res) => {
 	try {
-		const pagination = req.query.pagination ? parseInt(req.query.pagination) : 10;
+		const pagination = req.query.pagination ? parseInt(req.query.pagination) : 100;
 		const page = req.query.page ? parseInt(req.query.page) : 1;
 		const posts = await Post.find()
 			.skip((page - 1) * pagination)

@@ -22,15 +22,16 @@ const limiter = rateLimit({
 //  apply to all requests
 app.use(limiter);
 
-// Serve up static assets
-app.use(express.static("client/build"));
+
+
 
 mongoose.Promise = global.Promise;
 mongoose.connect(config.mongoURI, {
 	useNewUrlParser: true
 });
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public')));
+// Serve up static assets
+app.use(express.static("client/build"));
 
 app.use(passportJWT.initialize());
 

@@ -1,5 +1,5 @@
-module.exports = {
-	jwtSecret: 'dsadsa48415qweqa',
-	mongoURI:
-		'mongodb+srv://temitayo094:CatmyBeF4wRuHqtZ@duckfeed-elegv.mongodb.net/duckfeed?retryWrites=true&w=majority'
-};
+if(process.env.NODE_ENV === "production"){
+	module.exports = require('./prod');
+} else {
+	module.exports = require('./dev');
+}

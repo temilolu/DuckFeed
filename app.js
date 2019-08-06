@@ -22,6 +22,11 @@ const limiter = rateLimit({
 //  apply to all requests
 app.use(limiter);
 
+// Serve up static assets
+if(process.env.NODE_ENV === "production"){
+    app.use(express.static("client/build"));
+}
+
 mongoose.Promise = global.Promise;
 mongoose.connect(config.mongoURI, {
 	useNewUrlParser: true

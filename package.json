@@ -5,7 +5,8 @@
 	"main": "app.js",
 	"scripts": {
 		"test": "jest --detectOpenHandles",
-		"start": "PORT=3001 nodemon --inspect ./server.js"
+		"dev": "nodemon server.js",
+		"start": "node server.js"
 	},
 	"keywords": [],
 	"author": "",

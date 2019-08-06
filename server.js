@@ -10,6 +10,7 @@ const errorHandler = require('./middlewares/errorHandler');
 const passportJWT = require('./middlewares/passportJWT')();
 const config = require('./config');
 const rateLimit = require('./node_modules/express-rate-limit/lib/express-rate-limit');
+const PORT = process.env.PORT || 5001;
 
 const app = express();
 
@@ -24,14 +25,16 @@ const limiter = rateLimit({
 app.use(limiter);
 
 // Serve up static assets
-// app.use(express.static("client/build"));
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static('/client/build'));
+}
 
 mongoose.Promise = global.Promise;
 mongoose.connect(config.mongoURI, {
 	useNewUrlParser: true
 });
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, './client/build')));
+app.use(express.static(path.join(__dirname, '/client/build')));
 
 app.use(passportJWT.initialize());
 
@@ -42,14 +45,10 @@ app.use(errorHandler);
 app.get('/api', (req, res) => res.send('Welcome to duckfeed api'));
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, './client/build/index.html'), () => {
-        if(err){
-            res.status(500).send(err)
-        }
-    });
+    res.sendFile(path.join(__dirname, '/client/build/index.html'));
 });
 
 
-app.set('port', (process.env.PORT || 5000));
+app.set('port', (PORT));
 
 app.listen( app.get('port'), () => console.log( 'Server ready' + app.get('port') ) );

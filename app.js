@@ -23,14 +23,14 @@ const limiter = rateLimit({
 app.use(limiter);
 
 // Serve up static assets
-// app.use(express.static("client/build"));
+app.use(express.static("client/build"));
 
 mongoose.Promise = global.Promise;
 mongoose.connect(config.mongoURI, {
 	useNewUrlParser: true
 });
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'client', 'build')));
+// app.use(express.static(path.join(__dirname, 'client', 'build')));
 
 app.use(passportJWT.initialize());
 
@@ -39,5 +39,9 @@ app.use('/api/auth', authRoutes);
 app.use(errorHandler);
 
 app.get('/api', (req, res) => res.send('Welcome to duckfeed api'));
+
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 module.exports = app;
